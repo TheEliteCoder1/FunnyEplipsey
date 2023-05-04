@@ -1,0 +1,13 @@
+/* # = id selector */
+/* . = class selector */
+
+.Teens {
+    font-size: 40px;
+    text-align: center;
+    color: white;
+}
+
+.TeenDiv {
+    box-shadow: 10px 5px 5px rgb(100, 100, 100);
+    justify-content: center;
+}
