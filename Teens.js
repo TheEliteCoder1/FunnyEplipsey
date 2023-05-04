@@ -1,19 +1,18 @@
 var body = document.getElementsByTagName("body")
 var teenAge = 0;
 var teenName = "Munhar";
-var maxAge = 10000;
+var maxAge = 2000;
+var teenScale = 1;
 var teenTag = "<h1></h1>";
 var teenDeg = 0;
+var transX = 0;
+var transY = 0;
+var keepLooping = false;
+var keepLoopingScale = false;
 document.body.style.backgroundColor = "black";
 
 var teenNames = [
-    "Munhar", 
-    "Shashank", 
-    "Kymani", 
-    "Eshan", 
-    "Ethan",
-    "Sadaat",
-    "Raphael"
+    "Munhar",
 ]
 
 var fontList = [
@@ -31,7 +30,7 @@ var fontList = [
     "Baskerville",
     "Andalé Mono",
     "Courier",
-    "Lucida", 
+    "Lucida",
     "Monaco",
     "Bradley Hand",
     "Brush Script MT",
@@ -39,7 +38,7 @@ var fontList = [
     "Comic Sans MS",
 ]
 
-var textDecorationList = [ 
+var textDecorationList = [
     "dashed",  "dotted", "double", "none", "overline", "solid", "underline", "wavy"
 ]
 
@@ -55,8 +54,10 @@ function randomElement(arr) {
 // Executes every few miliseoncds
 // setInterval({code}, milils)
 setInterval(
-    function () 
+    function ()
     {
+      document.body.style.backgroundColor = `rgba(${numberInRange(0, 255)}, ${numberInRange(0, 255)}, ${numberInRange(0, 255)}, ${numberInRange(0.5, 1)})`;
+      
         var teenDivs = document.getElementsByClassName("TeenDiv");
         for (var i = 0; i < teenDivs.length; i++) {
             var teenDiv = teenDivs[i];
@@ -67,19 +68,20 @@ setInterval(
             //     var teenMessage = teenMessages[j];
             // }
         }
-    }, 
+    },
 
 100);
 
 setInterval(
-    function () 
+    function ()
     {
         var teenDivs = document.getElementsByClassName("TeenDiv");
         for (var i = 0; i < teenDivs.length; i++) {
             var teenDiv = teenDivs[i];
-            // teenDiv.style.transform = `rotate(${teenDeg}deg)skewX(${teenDeg}deg)`;
+            //scale takes 2 values
+            teenDiv.style.transform = `rotate(${teenDeg}turn)`;
         }
-    }, 
+    },
 
 100);
 
@@ -105,14 +107,29 @@ setInterval(
 )
 
 setInterval(
-    function () 
+    function ()
     {
-        if ( teenAge < maxAge) 
+        if ( teenAge < maxAge)
         {
             teenAge += 1
         
-        }; 
-        teenDeg += 1;
+        }
+        
+        if (teenDeg == 1) {
+          keepLooping = !keepLooping; // true
+        }
+        if (keepLooping) {
+          teenDeg -= 0.01
+          if (teenDeg == 0) {
+            keepLooping = !keepLooping// false
+          }
+        } else {
+          teenDeg += 0.01
+        }
+        
+        
+    
+        
         document.title = teenAge;
         var teenDivs = document.getElementsByClassName("TeenDiv");
         for (var i = 0; i < teenDivs.length; i++) {
@@ -120,11 +137,11 @@ setInterval(
             var teenMessages = teenDiv.getElementsByClassName("Teens");
             for (var j = 0; j < teenMessages.length; j++) {
                 var teenMessage = teenMessages[j];
-                teenMessage.innerHTML = `${teenName} is ${teenAge} years old`;
+                teenMessage.innerHTML = `${teenName} has been hacked ${teenAge} times!`
             }
         }
-    },  
-1);
+    },
+100);
 
 setInterval(
     function()
@@ -135,13 +152,13 @@ setInterval(
             div.className = "TeenDiv"
             var h1 = document.createElement("h1")
             h1.className = "Teens"
-            h1.innerHTML = `${teenName} is ${teenAge} years old`
+            h1.innerHTML = `${teenName} has been hacked ${teenAge} times!`
             div.appendChild(h1)
             document.body.appendChild(div)
 
         }
         
     },
-100
+2000
 )
 
